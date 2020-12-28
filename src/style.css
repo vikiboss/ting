@@ -1,19 +1,59 @@
-#wrapper {
+.bg {
+  color: #fff;
   margin: 0;
   display: flex;
   text-align: center;
   align-items: center;
+  background-color: #333;
   flex-direction: column;
-  justify-content: center;
+  transition: all 0.3s;
 }
 
-h1 {
+.playing-bg {
+  color: #333;
+  background-color: #fff;
+}
+
+.playing {
+  color: #333 !important;
+  background-color: #fff;
+}
+
+.title {
+  display: flex;
+}
+
+span {
   margin: 0;
-  font-size: 6rem;
+  width: 10rem;
+  line-height: 16rem;
+  font-size: 3rem;
   font-weight: lighter;
+  letter-spacing: 1rem;
 }
 
-#btn-wrapper {
+.timer {
+  color: #fff;
+  font-size: 2.4rem;
+  font-weight: lighter;
+  letter-spacing: 0.2rem;
+  transition: all 0.3s;
+  margin-bottom: 2rem;
+}
+
+.playing-timer {
+  letter-spacing: 2rem;
+}
+
+.current-time {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-top: 8rem;
+  font-weight: lighter;
+  letter-spacing: 0.2rem;
+}
+
+.btn-wrapper {
   width: 200px;
   height: 100px;
   display: flex;
@@ -21,15 +61,17 @@ h1 {
 }
 
 button {
-  width: 80px;
+  width: 8rem;
   color: #fff;
-  height: 80px;
+  height: 8rem;
   cursor: pointer;
   border: 1px solid #fff;
   outline: none;
+  font-size: 1.2rem;
+  text-align: center;
   transition: all 0.5s;
   user-select: none;
-  border-radius: 40px;
+  border-radius: 4rem;
   letter-spacing: 0.2rem;
   background-color: #333;
 }

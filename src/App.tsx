@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Lottie from 'react-lottie';
+import duration from 'dayjs/plugin/duration';
+import dayjs from 'dayjs';
 import 'normalize.css';
 
 import useWinSize from './utils/useWinSize';
 import heartData from './assets/heart.json';
 
 import './style.css';
+
+dayjs.extend(duration);
 
 const url = 'http://music.163.com/song/media/outer/url?id=17746129.mp3';
 const audio = new Audio(url);
@@ -19,50 +23,52 @@ const options = {
 const App: React.FC = () => {
   const size = useWinSize();
   const [playing, setPlaying] = useState<boolean>(true);
-  const [mode, setMode] = useState('quiet');
+  const [time, setTime] = useState<Date>(new Date());
+  const [diff, setDiff] = useState<number>(0);
+  const [timer, setTimer] = useState<any>(0);
 
-  const togglePlaying = () => setPlaying(!playing);
+  setInterval(() => setTime(new Date()), 1000);
 
-  const quiet = () => {
-    setMode('quiet');
-    audio.src = 'http://music.163.com/song/media/outer/url?id=17746129.mp3';
-    setPlaying(true);
-  };
-
-  const high = () => {
-    setMode('high');
-    audio.src = 'http://music.163.com/song/media/outer/url?id=1805842261.mp3';
-    setPlaying(true);
+  const togglePlaying = () => {
+    if (playing) {
+      setTimer(setInterval(() => setDiff((diff) => diff + 1000), 1000));
+    } else {
+      setDiff(0);
+      clearInterval(timer);
+    }
+    setPlaying(!playing);
   };
 
   useEffect(() => {
     playing ? audio.pause() : audio.play();
   }, [playing]);
 
-  const MODE_MAP = { quiet: ['#fff', '#333'], high: ['#333', '#fff'] };
+  const timerText = dayjs(diff).subtract(8, 'h').format('HH:mm:ss');
+  const btnText = playing ? '播放' : '暂停';
+  const now = dayjs(time).format('HH:mm:ss ddd. MMM.D');
 
   const lottieProps = {
-    width: 240,
-    height: 240,
+    width: '16rem',
+    height: '16rem',
     options: options,
     isPaused: playing,
   };
 
-  const wrapperStyles = {
-    ...size,
-    color: MODE_MAP[mode][0],
-    backgroundColor: MODE_MAP[mode][1],
-    transition: 'all 0.3s',
-  };
-
   return (
-    <div id='wrapper' style={{ ...wrapperStyles }} onClick={togglePlaying}>
-      <h1>听雨</h1>
-      <Lottie {...lottieProps} />
-      <div id='btn-wrapper'>
-        <button onClick={quiet}>安静</button>
-        <button onClick={high}>嗨起</button>
+    <div
+      style={{ ...size }}
+      onClick={togglePlaying}
+      className={`bg ${!playing ? 'playing-bg' : ''}`}
+    >
+      <div className='title'>
+        <span>听雨</span>
+        <Lottie {...lottieProps} style={{ margin: 0 }} />
       </div>
+      <div className={`timer ${!playing ? 'playing-timer playing' : ''}`}>
+        {timerText}
+      </div>
+      <button onClick={togglePlaying}>{btnText}</button>
+      <div className={`current-time ${!playing ? 'playing' : ''}`}>{now}</div>
     </div>
   );
 };
