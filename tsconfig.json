@@ -12,16 +12,20 @@
       "DOM",
       "esnext"
     ],
-    "jsx": "react",
+    "jsx": "react-jsx",
     "typeRoots": [
       "typings",
       "node_modules/@types"
     ],
-    "paths": {
-      "@*": [
-        "*"
-      ]
-    }
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "include": [
     "./src/**/*"
