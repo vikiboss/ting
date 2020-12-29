@@ -8,8 +8,8 @@ import heartData from './assets/heart.json';
 
 import './style.css';
 
-const musicUrl = 'http://music.163.com/song/media/outer/url?id=17746129.mp3';
-const rainUrl = 'http://media.xxoojoke.com/tingyu/therain.m4a';
+const musicUrl = 'https://music.163.com/song/media/outer/url?id=17746129';
+const rainUrl = 'https://music.163.com/song/media/outer/url?id=1294888855';
 
 const music = new Audio(musicUrl);
 const rain = new Audio(rainUrl);
