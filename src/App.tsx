@@ -13,6 +13,8 @@ const rainUrl = 'http://media.xxoojoke.com/tingyu/therain.m4a';
 
 const music = new Audio(musicUrl);
 const rain = new Audio(rainUrl);
+music.loop = true;
+rain.loop = true;
 
 const play = () => {
   music.play();
