@@ -11,8 +11,10 @@ import './style.css';
 
 dayjs.extend(duration);
 
-const url = 'http://music.163.com/song/media/outer/url?id=17746129.mp3';
-const audio = new Audio(url);
+const musicUrl = 'http://music.163.com/song/media/outer/url?id=17746129.mp3';
+const rainUrl = 'http://media.xxoojoke.com/tingyu/therain.m4a';
+const music = new Audio(musicUrl);
+const rain = new Audio(rainUrl);
 
 const options = {
   loop: true,
@@ -25,7 +27,7 @@ const App: React.FC = () => {
   const [playing, setPlaying] = useState<boolean>(true);
   const [time, setTime] = useState<Date>(new Date());
   const [diff, setDiff] = useState<number>(0);
-  const [timer, setTimer] = useState<any>(0);
+  const [timer, setTimer] = useState<any>(null);
 
   setInterval(() => setTime(new Date()), 1000);
 
@@ -33,23 +35,28 @@ const App: React.FC = () => {
     if (playing) {
       setTimer(setInterval(() => setDiff((diff) => diff + 1000), 1000));
     } else {
-      setDiff(0);
       clearInterval(timer);
+      setDiff(0);
     }
     setPlaying(!playing);
   };
 
   useEffect(() => {
-    playing ? audio.pause() : audio.play();
+    if (playing) {
+      music.pause();
+      rain.pause();
+    } else {
+      music.play();
+      rain.play();
+    }
   }, [playing]);
 
   const timerText = dayjs(diff).subtract(8, 'h').format('HH:mm:ss');
-  const btnText = playing ? '播放' : '暂停';
   const now = dayjs(time).format('HH:mm:ss ddd. MMM.D');
 
   const lottieProps = {
-    width: '16rem',
-    height: '16rem',
+    width: '4rem',
+    height: '4rem',
     options: options,
     isPaused: playing,
   };
@@ -58,17 +65,20 @@ const App: React.FC = () => {
     <div
       style={{ ...size }}
       onClick={togglePlaying}
-      className={`bg ${!playing ? 'playing-bg' : ''}`}
+      className={`${!playing ? 'playing' : ''} bg`}
     >
       <div className='title'>
         <span>听雨</span>
         <Lottie {...lottieProps} style={{ margin: 0 }} />
       </div>
-      <div className={`timer ${!playing ? 'playing-timer playing' : ''}`}>
+      <div className={`${!playing ? 'playing-timer' : ''} timer`}>
         {timerText}
       </div>
-      <button onClick={togglePlaying}>{btnText}</button>
-      <div className={`current-time ${!playing ? 'playing' : ''}`}>{now}</div>
+      <button
+        onClick={togglePlaying}
+        className={`${!playing ? 'playing-btn' : ''}`}
+      />
+      <div className={`${!playing ? 'playing' : ''} current-time`}>{now}</div>
     </div>
   );
 };

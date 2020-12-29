@@ -1,52 +1,49 @@
 .bg {
-  color: #fff;
+  color: #333;
   margin: 0;
   display: flex;
   text-align: center;
   align-items: center;
-  background-color: #333;
+  justify-content: center;
+  background-color: #fff;
   flex-direction: column;
   transition: all 0.3s;
 }
 
-.playing-bg {
-  color: #333;
-  background-color: #fff;
-}
-
 .playing {
-  color: #333 !important;
-  background-color: #fff;
+  color: #fff;
+  background-color: #333;
 }
 
 .title {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 span {
   margin: 0;
-  width: 10rem;
-  line-height: 16rem;
+  width: 8rem;
+  height: 8rem;
+  line-height: 8rem;
   font-size: 3rem;
   font-weight: lighter;
   letter-spacing: 1rem;
 }
 
 .timer {
-  color: #fff;
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: lighter;
   letter-spacing: 0.2rem;
   transition: all 0.3s;
-  margin-bottom: 2rem;
+  margin: 4rem 0 2rem 0;
 }
 
 .playing-timer {
-  letter-spacing: 2rem;
+  letter-spacing: 1.3rem;
 }
 
 .current-time {
-  color: #fff;
   font-size: 1.2rem;
   margin-top: 8rem;
   font-weight: lighter;
@@ -61,11 +58,11 @@ span {
 }
 
 button {
-  width: 8rem;
-  color: #fff;
-  height: 8rem;
+  width: 2rem;
+  justify-self: center;
+  height: 2rem;
   cursor: pointer;
-  border: 1px solid #fff;
+  border: 2px solid #333;
   outline: none;
   font-size: 1.2rem;
   text-align: center;
@@ -73,11 +70,20 @@ button {
   user-select: none;
   border-radius: 4rem;
   letter-spacing: 0.2rem;
-  background-color: #333;
+  background-color: #fff;
 }
 
 button:hover {
-  color: #333;
-  font-weight: bold;
   background-color: #fff;
+  border: 2px solid #fff;
+}
+
+.playing-btn {
+  background: #333;
+  border: 2px solid #fff;
+}
+
+.playing-btn:hover {
+  background-color: #333;
+  border: 2px solid #fff;
 }
